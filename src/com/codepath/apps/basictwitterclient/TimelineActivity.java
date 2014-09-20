@@ -19,6 +19,9 @@ public class TimelineActivity extends Activity {
 	private ArrayList<Tweet> tweets;
 	private ArrayAdapter<Tweet> aTweets;
 	private ListView lvTweets;
+	protected long curr_max_id;
+	
+	public static final int TWEET_COUNT = 12;
 	
 	
 	
@@ -29,24 +32,43 @@ public class TimelineActivity extends Activity {
 		client = TwitterApplication.getRestClient();
 		lvTweets = (ListView) findViewById(R.id.lvTweets);
 		tweets = new ArrayList<Tweet>();
-		aTweets = new ArrayAdapter<Tweet>(this, android.R.layout.simple_list_item_1, tweets);
+		aTweets = new TweetArrayAdapter(this, tweets);
 		lvTweets.setAdapter(aTweets);
-		populateTimeline();
+		
+		lvTweets.setOnScrollListener(new EndlessScrollListener() {
+			
+			@Override
+			public void onLoadMore(int page, int totalItemsCount) {
+				// Triggered only when new data needs to be appended to the list
+                // Add whatever code is needed to append new items to your AdapterView
+				customLoadMoreDataFromApi(); 
+                // or customLoadMoreDataFromApi(totalItemsCount); 
+				
+			}
+		});
+		populateTimeline(true, -1, TWEET_COUNT);
 	}
 
-	private void populateTimeline() {
+	protected void customLoadMoreDataFromApi() {
+		populateTimeline(false, this.curr_max_id, TWEET_COUNT);
+	}
+
+	private void populateTimeline(boolean initial, long max_id, int count) {
 		client.getHomeTimeline(new JsonHttpResponseHandler(){
 			
 			@Override
 			public void onSuccess(JSONArray json) {
 				aTweets.addAll(Tweet.fromJSONArray(json));
+				//Get the id and set the current_max_id
+				Tweet lastTweet = tweets.get(tweets.size() - 1);
+				TimelineActivity.this.curr_max_id = lastTweet.getUid();
 			}
 			@Override
 			public void onFailure(Throwable e, String s) {
 				Log.d("debug", e.toString());
 				Log.d("debug", s);
 			}
-		});
+		}, max_id, count, initial);
 		
 	}
 
