@@ -3,6 +3,7 @@ package com.codepath.apps.basictwitterclient;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.codepath.oauth.OAuthLoginActivity;
@@ -21,6 +22,7 @@ public class LoginActivity extends OAuthLoginActivity<TwitterClient> {
 		getMenuInflater().inflate(R.menu.login, menu);
 		return true;
 	}
+	
 
 	// OAuth authenticated successfully, launch primary authenticated activity
 	// i.e Display application "homepage"

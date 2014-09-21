@@ -47,6 +47,14 @@
             android:name="com.codepath.apps.basictwitterclient.TimelineActivity"
             android:label="@string/title_activity_timeline" >
         </activity>
+        <activity
+            android:name="com.codepath.apps.basictwitterclient.ComposeTweetActivity"
+            android:label="@string/title_activity_compose_tweet"
+            android:parentActivityName="com.codepath.apps.basictwitterclient.TimelineActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.codepath.apps.basictwitterclient.TimelineActivity" />
+        </activity>
     </application>
 
 </manifest>

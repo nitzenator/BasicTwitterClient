@@ -9,10 +9,13 @@ import com.loopj.android.http.JsonHttpResponseHandler;
 
 import android.os.Bundle;
 import android.app.Activity;
+import android.content.Intent;
 import android.util.Log;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class TimelineActivity extends Activity {
 	private TwitterClient client;
@@ -22,6 +25,7 @@ public class TimelineActivity extends Activity {
 	protected long curr_max_id;
 	
 	public static final int TWEET_COUNT = 12;
+	private static final int REQUEST_CODE = 1;
 	
 	
 	
@@ -71,12 +75,28 @@ public class TimelineActivity extends Activity {
 		}, max_id, count, initial);
 		
 	}
+	
+	
+	public void onCompose(MenuItem mi){
+		Intent composeIntent = new Intent(this, ComposeTweetActivity.class);
+		//composeIntent.putExtra("settings", settings);
+		startActivityForResult(composeIntent, REQUEST_CODE);
+	}
+	
+	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+		  // REQUEST_CODE is defined above
+		  if (resultCode == RESULT_OK && requestCode == REQUEST_CODE) {
+		     Tweet composedTweet = (Tweet) data.getSerializableExtra("posted_tweet");
+		     aTweets.insert(composedTweet, 0);
+		     Toast.makeText(this, R.string.tweet_success, Toast.LENGTH_SHORT).show();
+		  }
+	} 
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.timeline, menu);
-		return true;
+		return super.onCreateOptionsMenu(menu);
 	}
 
 }
