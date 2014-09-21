@@ -7,6 +7,9 @@ import org.json.JSONArray;
 import com.codepath.apps.basictwitterclient.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
+import eu.erikw.PullToRefreshListView;
+import eu.erikw.PullToRefreshListView.OnRefreshListener;
+
 import android.os.Bundle;
 import android.app.Activity;
 import android.content.Intent;
@@ -14,14 +17,13 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
-import android.widget.ListView;
 import android.widget.Toast;
 
 public class TimelineActivity extends Activity {
 	private TwitterClient client;
 	private ArrayList<Tweet> tweets;
 	private ArrayAdapter<Tweet> aTweets;
-	private ListView lvTweets;
+	private PullToRefreshListView lvTweets;
 	protected long curr_max_id;
 	
 	public static final int TWEET_COUNT = 12;
@@ -34,11 +36,21 @@ public class TimelineActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_timeline);
 		client = TwitterApplication.getRestClient();
-		lvTweets = (ListView) findViewById(R.id.lvTweets);
+		lvTweets = (PullToRefreshListView) findViewById(R.id.lvTweets);
 		tweets = new ArrayList<Tweet>();
 		aTweets = new TweetArrayAdapter(this, tweets);
 		lvTweets.setAdapter(aTweets);
+		lvTweets.setOnRefreshListener(new OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                // Your code to refresh the list here.
+                // Make sure you call listView.onRefreshComplete() when
+                // once the network request has completed successfully.
+            	customLoadMoreDataFromApi();
+            }
+        });
 		
+		/*
 		lvTweets.setOnScrollListener(new EndlessScrollListener() {
 			
 			@Override
@@ -50,6 +62,9 @@ public class TimelineActivity extends Activity {
 				
 			}
 		});
+		*/
+		
+		
 		populateTimeline(true, -1, TWEET_COUNT);
 	}
 
@@ -66,6 +81,7 @@ public class TimelineActivity extends Activity {
 				//Get the id and set the current_max_id
 				Tweet lastTweet = tweets.get(tweets.size() - 1);
 				TimelineActivity.this.curr_max_id = lastTweet.getUid();
+				lvTweets.onRefreshComplete();
 			}
 			@Override
 			public void onFailure(Throwable e, String s) {

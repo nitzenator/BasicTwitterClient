@@ -15,5 +15,9 @@
     <string name="post_tweet">Post</string>
     <string name="title_activity_compose_tweet">ComposeTweetActivity</string>
     <string name="tweet_success">You tweeted successfully !</string>
+    <string name="ptr_pull_to_refresh">Pull to refresh</string>
+    <string name="ptr_release_to_refresh">Release to refresh</string>
+    <string name="ptr_refreshing">Refreshing…</string>
+    <string name="ptr_last_updated">Updated: %1$s</string>
 
 </resources>
