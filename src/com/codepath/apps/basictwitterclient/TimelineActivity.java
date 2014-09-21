@@ -46,11 +46,12 @@ public class TimelineActivity extends Activity {
                 // Your code to refresh the list here.
                 // Make sure you call listView.onRefreshComplete() when
                 // once the network request has completed successfully.
-            	customLoadMoreDataFromApi();
+            	aTweets.clear();
+            	populateTimeline(true, -1, TWEET_COUNT);
             }
         });
 		
-		/*
+		
 		lvTweets.setOnScrollListener(new EndlessScrollListener() {
 			
 			@Override
@@ -62,7 +63,7 @@ public class TimelineActivity extends Activity {
 				
 			}
 		});
-		*/
+		
 		
 		
 		populateTimeline(true, -1, TWEET_COUNT);
@@ -77,10 +78,13 @@ public class TimelineActivity extends Activity {
 			
 			@Override
 			public void onSuccess(JSONArray json) {
-				aTweets.addAll(Tweet.fromJSONArray(json));
-				//Get the id and set the current_max_id
-				Tweet lastTweet = tweets.get(tweets.size() - 1);
-				TimelineActivity.this.curr_max_id = lastTweet.getUid();
+				ArrayList<Tweet> allTweets = Tweet.fromJSONArray(json);
+				if(allTweets.size() > 0){
+					aTweets.addAll(allTweets);
+					//Get the id and set the current_max_id
+					Tweet lastTweet = allTweets.get(allTweets.size() - 1);
+					TimelineActivity.this.curr_max_id = lastTweet.getUid();
+				}
 				lvTweets.onRefreshComplete();
 			}
 			@Override

@@ -1,22 +1,31 @@
 package eu.erikw;
 
-import android.content.Context;
-import android.util.AttributeSet;
-import android.util.Log;
-import android.view.*;
-import android.view.ViewTreeObserver.OnGlobalLayoutListener;
-import android.view.animation.*;
-import android.view.animation.Animation.AnimationListener;
-import android.widget.*;
-
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import android.content.Context;
+import android.util.AttributeSet;
+import android.view.LayoutInflater;
+import android.view.MotionEvent;
+import android.view.View;
+import android.view.ViewGroup;
+import android.view.ViewTreeObserver;
+import android.view.ViewTreeObserver.OnGlobalLayoutListener;
+import android.view.animation.Animation;
+import android.view.animation.Animation.AnimationListener;
+import android.view.animation.LinearInterpolator;
+import android.view.animation.OvershootInterpolator;
+import android.view.animation.RotateAnimation;
+import android.view.animation.TranslateAnimation;
+import android.widget.AdapterView;
+import android.widget.ImageView;
+import android.widget.LinearLayout;
+import android.widget.ListView;
+import android.widget.ProgressBar;
+import android.widget.RelativeLayout;
+import android.widget.TextView;
+
 import com.codepath.apps.basictwitterclient.R;
-import com.codepath.apps.basictwitterclient.R.id;
-import com.codepath.apps.basictwitterclient.R.layout;
-import com.codepath.apps.basictwitterclient.R.string;
 
 /**
  * A generic, customizable Android ListView implementation that has 'Pull to Refresh' functionality.
