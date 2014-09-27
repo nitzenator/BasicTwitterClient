@@ -14,6 +14,8 @@ public class User implements Serializable{
 	private long uid;
 	private String screenName;
 	private String profileImageUrl;
+	private int numFollowers;
+	private int numFollowing;
 
 	public static User fromJSON(JSONObject jsonObject) {
 		User user = new User();
@@ -22,6 +24,9 @@ public class User implements Serializable{
 			user.setUid(jsonObject.getLong("id"));
 			user.setScreenName(jsonObject.getString("screen_name"));
 			user.setProfileImageUrl(jsonObject.getString("profile_image_url"));
+			user.setNumFollowers(jsonObject.getInt("followers_count"));
+			//user.setNumFollowing(jsonObject.getInt("following"));
+			
 			
 		}catch (JSONException e){
 			e.printStackTrace();
@@ -61,6 +66,22 @@ public class User implements Serializable{
 
 	public void setProfileImageUrl(String profileImageUrl) {
 		this.profileImageUrl = profileImageUrl;
+	}
+
+	public int getNumFollowers() {
+		return numFollowers;
+	}
+
+	public void setNumFollowers(int numFollowers) {
+		this.numFollowers = numFollowers;
+	}
+
+	public int getNumFollowing() {
+		return numFollowing;
+	}
+
+	public void setNumFollowing(int numFollowing) {
+		this.numFollowing = numFollowing;
 	}
 
 }

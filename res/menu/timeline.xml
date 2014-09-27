@@ -1,5 +1,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android" >
 
+    <item android:id="@+id/profile"
+          android:title="@string/profile"
+           android:showAsAction="ifRoom"
+           android:icon="@drawable/profile_icon"
+           android:onClick="onProfileView"
+        />
     <item android:id="@+id/compose_tweet"
         android:title="@string/compose_tweet"
         android:icon="@drawable/compose_tweet_icon"

@@ -53,7 +53,10 @@ public class TimelineActivity extends FragmentActivity {
 	}
 		
 	
-
+	public void onProfileView(MenuItem mi){
+		Intent intent = new Intent(this, ProfileActivity.class);
+		startActivity(intent);
+	}
 
 	public void onCompose(MenuItem mi){
 		Intent composeIntent = new Intent(this, ComposeTweetActivity.class);
