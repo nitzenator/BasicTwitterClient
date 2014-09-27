@@ -25,7 +25,7 @@ public class User implements Serializable{
 			user.setScreenName(jsonObject.getString("screen_name"));
 			user.setProfileImageUrl(jsonObject.getString("profile_image_url"));
 			user.setNumFollowers(jsonObject.getInt("followers_count"));
-			//user.setNumFollowing(jsonObject.getInt("following"));
+			user.setNumFollowing(jsonObject.getInt("friends_count"));
 			
 			
 		}catch (JSONException e){

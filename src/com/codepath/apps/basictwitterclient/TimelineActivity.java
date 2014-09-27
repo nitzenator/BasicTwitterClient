@@ -4,6 +4,7 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -12,6 +13,7 @@ import android.widget.Toast;
 import com.codepath.apps.basictwitterclient.fragments.HomeTimelineFragment;
 import com.codepath.apps.basictwitterclient.fragments.MentionsTimelineFragment;
 import com.codepath.apps.basictwitterclient.fragments.TweetsListFragment;
+import com.codepath.apps.basictwitterclient.models.Tweet;
 
 public class TimelineActivity extends FragmentActivity {
 	
@@ -34,7 +36,7 @@ public class TimelineActivity extends FragmentActivity {
 			.setIcon(R.drawable.ic_home)
 			.setTag("HomeTimelineFragment")
 			.setTabListener(
-				new FragmentTabListener<HomeTimelineFragment>(R.id.flContainer, this, "first",
+				new FragmentTabListener<HomeTimelineFragment>(R.id.flContainer, this, "HomeTimelineFragment",
 						HomeTimelineFragment.class));
 
 		actionBar.addTab(tab1);
@@ -67,8 +69,9 @@ public class TimelineActivity extends FragmentActivity {
 	protected void onActivityResult(int requestCode, int resultCode, Intent data) {
 		  // REQUEST_CODE is defined above
 		  if (resultCode == RESULT_OK && requestCode == TweetsListFragment.REQUEST_CODE) {
-		     //Tweet composedTweet = (Tweet) data.getSerializableExtra("posted_tweet");
-		     //aTweets.insert(composedTweet, 0);
+		     Tweet composedTweet = (Tweet) data.getSerializableExtra("posted_tweet");
+		     HomeTimelineFragment homeFragment = (HomeTimelineFragment) getSupportFragmentManager().findFragmentByTag("HomeTimelineFragment");
+			 homeFragment.addTweet(composedTweet);
 		     Toast.makeText(this, R.string.tweet_success, Toast.LENGTH_SHORT).show();
 		  }
 	} 

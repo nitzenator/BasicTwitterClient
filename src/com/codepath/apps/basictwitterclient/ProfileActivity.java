@@ -20,6 +20,8 @@ public class ProfileActivity extends FragmentActivity {
 	private TwitterClient client;
 	private ImageView profileImageView;
 	private TextView tvUsername;
+	private TextView tvFollowersCount;
+	private TextView tvFollowingCount;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +30,8 @@ public class ProfileActivity extends FragmentActivity {
 		client = new TwitterClient(this);
 		profileImageView = (ImageView) findViewById(R.id.ivProfileImage);
 		tvUsername = (TextView) findViewById(R.id.tvUsername);
+		tvFollowersCount = (TextView) findViewById(R.id.tvFollowersCount);
+		tvFollowingCount = (TextView) findViewById(R.id.tvFollowingCount);
 		loadProfileInfo();
 		
 	}
@@ -41,6 +45,8 @@ public class ProfileActivity extends FragmentActivity {
 				
 				profileImageView.setImageResource(android.R.color.transparent);
 				tvUsername.setText(u.getName());
+				tvFollowersCount.setText("Followers " + u.getNumFollowers());
+				tvFollowingCount.setText("Following " + u.getNumFollowing());
 				
 				ImageLoader imageLoader = ImageLoader.getInstance();
 				imageLoader.displayImage(u.getProfileImageUrl(), profileImageView);

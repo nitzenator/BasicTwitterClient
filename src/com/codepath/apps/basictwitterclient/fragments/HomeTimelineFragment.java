@@ -34,4 +34,9 @@ public class HomeTimelineFragment extends TweetsListFragment {
 		
 	}
 
+	public void addTweet(Tweet composedTweet) {
+		aTweets.insert(composedTweet, 0);
+		
+	}
+
 }
