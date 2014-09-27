@@ -17,7 +17,7 @@ Completed user stories:
  * [x] User can click a “Compose” icon in the Action Bar on the top right
  * [x] User can then enter a new tweet and post this to twitter
  * [x] User is taken back to home timeline with new tweet visible in timeline
- * [x] Optional: Pull-to-refresh using 3rd party library 
+ 
 Notes:
 
 * Spent some time going over understanding of how the endless scrolling works and working with pull-to-refresh
