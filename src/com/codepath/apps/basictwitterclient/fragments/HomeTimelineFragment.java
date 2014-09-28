@@ -4,13 +4,16 @@ import java.util.ArrayList;
 
 import org.json.JSONArray;
 
+import android.app.Activity;
 import android.util.Log;
+import android.view.View;
 
 import com.codepath.apps.basictwitterclient.models.Tweet;
+import com.codepath.apps.basictwitterclient.models.User;
 import com.loopj.android.http.JsonHttpResponseHandler;
 
 public class HomeTimelineFragment extends TweetsListFragment {
-
+	
 	protected void populateTimeline(boolean initial, long max_id, int count) {
 		client.getHomeTimeline(new JsonHttpResponseHandler(){
 			

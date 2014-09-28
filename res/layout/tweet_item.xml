@@ -9,7 +9,8 @@
         android:layout_height="40dp"
         android:layout_alignParentLeft="true"
         android:layout_alignParentTop="true"
-        android:src="@drawable/ic_launcher" android:contentDescription="@string/profile_image_cd"/>
+        android:src="@drawable/ic_launcher" android:contentDescription="@string/profile_image_cd"
+        />
 
     <TextView
         android:id="@+id/tvUserName"

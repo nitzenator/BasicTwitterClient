@@ -6,6 +6,7 @@ import org.json.JSONArray;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
 
 import com.codepath.apps.basictwitterclient.models.Tweet;
 import com.loopj.android.http.JsonHttpResponseHandler;
@@ -59,5 +60,5 @@ public class UserTimelineFragment extends TweetsListFragment {
 		this.userId = userId;
 	}
 
-	
+		
   }

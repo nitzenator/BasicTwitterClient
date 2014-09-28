@@ -4,7 +4,6 @@ import android.app.ActionBar;
 import android.app.ActionBar.Tab;
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,9 +12,11 @@ import android.widget.Toast;
 import com.codepath.apps.basictwitterclient.fragments.HomeTimelineFragment;
 import com.codepath.apps.basictwitterclient.fragments.MentionsTimelineFragment;
 import com.codepath.apps.basictwitterclient.fragments.TweetsListFragment;
+import com.codepath.apps.basictwitterclient.fragments.TweetsListFragment.OnItemSelectedListener;
 import com.codepath.apps.basictwitterclient.models.Tweet;
+import com.codepath.apps.basictwitterclient.models.User;
 
-public class TimelineActivity extends FragmentActivity {
+public class TimelineActivity extends FragmentActivity implements OnItemSelectedListener{
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -24,6 +25,9 @@ public class TimelineActivity extends FragmentActivity {
 		setupTabs();
 	}
 
+	
+	
+	
 	
 	private void setupTabs() {
 		ActionBar actionBar = getActionBar();
@@ -81,6 +85,18 @@ public class TimelineActivity extends FragmentActivity {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.timeline, menu);
 		return super.onCreateOptionsMenu(menu);
+	}
+
+
+
+
+
+	@Override
+	public void onTweetItemSelected(User u) {
+		Intent intent = new Intent(this, ProfileActivity.class);
+		intent.putExtra("user", u);
+		startActivity(intent);
+		
 	}
 
 }
